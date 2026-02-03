@@ -14,7 +14,7 @@ public class Notebook extends Stationery {
 
     @Override
     public void initialize() {
-        super.initialize(); // Product + Stationery input
+        super.initialize(); 
 
         System.out.println("Enter Page Count:");
         String input = getInput("100");
