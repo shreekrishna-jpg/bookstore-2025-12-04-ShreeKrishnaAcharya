@@ -1,6 +1,12 @@
 package csd214.bookstore;
 
 import csd214.bookstore.pojos.*;
+import csd214.bookstore.pojos.Stationery;
+import csd214.bookstore.pojos.Pen;
+import csd214.bookstore.pojos.Notebook;
+import csd214.bookstore.pojos.SportsEquipment;
+import csd214.bookstore.pojos.Football;
+import csd214.bookstore.pojos.TennisRacket;
 import com.github.javafaker.Faker;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +74,10 @@ public class App {
             System.out.println("2. Add Magazine");
             System.out.println("3. Add DiscMag");
             System.out.println("4. Add Ticket");
+            System.out.println("5. Add Pen");
+            System.out.println("6. Add Notebook");
+            System.out.println("7. Add Football");
+            System.out.println("8. Add Tennis Racket");
             System.out.println("99. Exit");
 
             try {
@@ -81,16 +91,38 @@ public class App {
             if (choice == 99) return;
 
             SaleableItem item = null;
-            switch(choice) {
-                case 1: item = new Book(); break;
-                case 2: item = new Magazine(); break;
-                case 3: item = new DiscMag(); break;
-                case 4: item = new Ticket(); break;
-                default: System.out.println("Invalid selection."); continue;
+            switch (choice) {
+                case 1:
+                    item = new Book();
+                    break;
+                case 2:
+                    item = new Magazine();
+                    break;
+                case 3:
+                    item = new DiscMag();
+                    break;
+                case 4:
+                    item = new Ticket();
+                    break;
+                case 5:
+                    item = new Pen();
+                    break;
+                case 6:
+                    item = new Notebook();
+                    break;
+                case 7:
+                    item = new Football();
+                    break;
+                case 8:
+                    item = new TennisRacket();
+                    break;
+                default:
+                    System.out.println("Invalid selection.");
+                    continue;
             }
 
-            if(item instanceof Editable) {
-                ((Editable)item).initialize();
+            if (item instanceof Editable) {
+                ((Editable) item).initialize();
             }
             addItem(item);
         }
@@ -111,6 +143,8 @@ public class App {
             System.out.println("3. Magazines");
             System.out.println("4. DiscMags");
             System.out.println("5. Tickets");
+            System.out.println("6. Stationery");
+            System.out.println("7. SportsEquipment");
             System.out.println("99. Exit");
 
             try {
@@ -124,13 +158,31 @@ public class App {
             if (choice == 99) return;
 
             Class<?> filter = null;
-            switch(choice) {
-                case 1: filter = null; break;
-                case 2: filter = Book.class; break;
-                case 3: filter = Magazine.class; break;
-                case 4: filter = DiscMag.class; break;
-                case 5: filter = Ticket.class; break;
-                default: System.out.println("Invalid selection."); continue;
+            switch (choice) {
+                case 1:
+                    filter = null;
+                    break;
+                case 2:
+                    filter = Book.class;
+                    break;
+                case 3:
+                    filter = Magazine.class;
+                    break;
+                case 4:
+                    filter = DiscMag.class;
+                    break;
+                case 5:
+                    filter = Ticket.class;
+                    break;
+                case 6:
+                    filter = Stationery.class;
+                    break;
+                case 7:
+                    filter = SportsEquipment.class;
+                    break;
+                default:
+                    System.out.println("Invalid selection.");
+                    continue;
             }
 
             for (SaleableItem i : items) {
@@ -138,6 +190,7 @@ public class App {
                 if (filter == null) {
                     show = true;
                 } else {
+                    // Special handling for Magazine and DiscMag
                     if (filter == Magazine.class && i instanceof DiscMag) {
                         show = false;
                     } else if (filter.isInstance(i)) {
@@ -158,7 +211,7 @@ public class App {
 
     public void editItem() {
         System.out.println("Select item index to edit (0 to " + (items.size() - 1) + "):");
-        for(int i=0; i<items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             System.out.println(i + ". " + items.get(i));
         }
 
@@ -183,7 +236,7 @@ public class App {
 
     public void deleteItem() {
         System.out.println("Select item index to delete:");
-        for(int i=0; i<items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             System.out.println(i + ". " + items.get(i));
         }
         try {
@@ -199,7 +252,7 @@ public class App {
 
     public void sellItem() {
         System.out.println("Select item index to sell:");
-        for(int i=0; i<items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             System.out.println(i + ". " + items.get(i));
         }
         try {
@@ -267,6 +320,40 @@ public class App {
             t.description = "Concert: " + faker.rockBand().name();
             t.price = faker.number().randomDouble(2, 50, 150);
             addItem(t);
+
+            // Pen
+            Pen p = new Pen();
+            p.setName(faker.commerce().productName() + " Pen");
+            p.setPrice(faker.number().randomDouble(2, 1, 10));
+            p.setBrand(faker.company().name());
+            p.setColor(faker.color().name());
+            addItem(p);
+
+            // Notebook
+            Notebook n = new Notebook();
+            n.setName(faker.commerce().productName() + " Notebook");
+            n.setPrice(faker.number().randomDouble(2, 5, 25));
+            n.setBrand(faker.company().name());
+            n.setPageCount(faker.number().numberBetween(50, 300));
+            addItem(n);
+
+            // Football
+            Football bb = new Football();
+            bb.setName(faker.commerce().productName() + " Football");
+            bb.setPrice(faker.number().randomDouble(2, 20, 100));
+            bb.setMaterial(faker.commerce().material());
+            bb.setSportType("Football");
+            bb.setSize(faker.number().numberBetween(5, 7));
+            addItem(bb);
+
+            // Tennis Racket
+            TennisRacket tr = new TennisRacket();
+            tr.setName(faker.commerce().productName() + " Tennis Racket");
+            tr.setPrice(faker.number().randomDouble(2, 50, 200));
+            tr.setMaterial(faker.commerce().material());
+            tr.setSportType("Tennis");
+            tr.setStringTension(faker.number().numberBetween(40, 70));
+            addItem(tr);
         }
     }
 }
