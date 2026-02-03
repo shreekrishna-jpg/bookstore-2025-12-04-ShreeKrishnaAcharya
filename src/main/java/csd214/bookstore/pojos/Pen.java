@@ -1,7 +1,7 @@
 package csd214.bookstore.pojos;
 
 public class Pen extends Stationery {
-    // Field: private String color; (e.g., Blue, Red)
+    
     private String color;
 
     public String getColor() {
@@ -19,7 +19,7 @@ public class Pen extends Stationery {
 
         System.out.println("Enter Color:");
 
-        this.color = getInput(""); // Provides empty string as default
+        this.color = getInput(""); 
     }
 
     @Override
