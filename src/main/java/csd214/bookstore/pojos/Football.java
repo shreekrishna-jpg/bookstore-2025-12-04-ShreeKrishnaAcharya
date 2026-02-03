@@ -2,7 +2,7 @@ package csd214.bookstore.pojos;
 
 public class Football extends SportsEquipment {
 
-    private int size; // e.g., size 3, 4, 5
+    private int size; 
 
     public int getSize() {
         return size;
