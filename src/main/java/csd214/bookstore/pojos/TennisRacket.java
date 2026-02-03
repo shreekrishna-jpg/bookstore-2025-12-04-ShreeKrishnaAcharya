@@ -2,7 +2,7 @@ package csd214.bookstore.pojos;
 
 public class TennisRacket extends SportsEquipment {
 
-    private int stringTension;  // <-- add field
+    private int stringTension;  
 
     public int getStringTension() {
         return stringTension;
